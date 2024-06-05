@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/controller/user_controller.dart';
 import 'package:get/get.dart';
-import '../models/sharing_post.dart';
+import '../../models/sharing_post.dart';
 
 class SharingDetailPage extends StatefulWidget {
   final Post post;

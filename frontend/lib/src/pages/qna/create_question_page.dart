@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:frontend/src/controller/user_controller.dart';
 import 'package:get/get.dart';
-import 'qna_page.dart';
 
 class CreateQuestionPage extends StatefulWidget {
   const CreateQuestionPage({Key? key}) : super(key: key);

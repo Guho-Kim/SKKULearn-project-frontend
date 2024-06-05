@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/qna_post.dart';
-import '../pages/qna_detail_page.dart';
+import '../pages/qna/qna_detail_page.dart';
 
 class QnAPostWidget extends StatelessWidget {
   final Post post;
@@ -19,6 +19,7 @@ class QnAPostWidget extends StatelessWidget {
 
   Widget _title() {
     return Container(
+      width: 240,
       padding: const EdgeInsets.only(left: 10, top: 10),
       child: Text(
         '${post.title}',
@@ -33,7 +34,7 @@ class QnAPostWidget extends StatelessWidget {
 
   Widget _point() {
     return Container(
-      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+      padding: const EdgeInsets.only(top: 10, right: 10),
       child: Text(
         '${post.point}P',
         style: const TextStyle(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/pages/SharingDetailPage.dart';
+import 'package:frontend/src/pages/sharing/SharingDetailPage.dart';
 import 'package:get/get.dart';
 import '../models/sharing_post.dart';
 

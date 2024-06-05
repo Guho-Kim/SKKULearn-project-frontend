@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/controller/bottom_nav_controller.dart';
 import 'package:get/get.dart';
-import 'pages/my_page.dart';
-import 'pages/qna_page.dart';
-import 'pages/sharing_page.dart';
-import 'pages/recruiting_page.dart';
-import 'pages/login_page.dart';
+import 'pages/mypage/my_page.dart';
+import 'pages/qna/qna_page.dart';
+import 'pages/sharing/sharing_page.dart';
+import 'pages/recruiting/recruiting_page.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:frontend/src/controller/user_controller.dart';
+import 'package:frontend/src/models/qna_post.dart';
+import 'package:frontend/src/pages/sharing/other_user_page.dart';
 import 'package:get/get.dart';
-import '../models/qna_post.dart';
-import 'other_user_page.dart';
 
 class QnADetailPage extends StatefulWidget {
   final Post post;
@@ -29,8 +28,32 @@ class _QnADetailPageState extends State<QnADetailPage> {
     setState(() {
       comments.add(Comment(author: author, content: content));
     });
+    userController.point.value += 5;
     _commentController.clear();
     FocusScope.of(context).unfocus(); // 키보드 자판 내리기
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Uploading Comments'),
+          content: Text('Got 5 Points'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _addComment(
+                    '${userController.username.value}/Software Department',
+                    _commentController.text);
+                Navigator.of(context).pop(); // 다이얼로그 닫기
+              },
+              child: Text('Exit'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _goToOtherUserPage(String username) {
@@ -189,11 +212,11 @@ class _QnADetailPageState extends State<QnADetailPage> {
                     SizedBox(
                       width: 80,
                       child: TextButton(
-                        // icon: Icon(Icons.send),
                         onPressed: () {
-                          _addComment(
-                              '${userController.username.value}/소프트웨어학부',
-                              _commentController.text);
+                          // _addComment(
+                          //     '${userController.username.value}/소프트웨어학부',
+                          //     _commentController.text);
+                          _showConfirmationDialog();
                         },
                         child: const Text(
                           'Send',

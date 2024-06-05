@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
-import '../components/qna_post_widget.dart';
-import '../models/qna_post.dart';
+import '../../components/qna_post_widget.dart';
+import '../../models/qna_post.dart';
 import 'create_question_page.dart';
 
 class QnAPage extends StatefulWidget {

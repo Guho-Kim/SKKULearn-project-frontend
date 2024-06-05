@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:frontend/src/components/sharing_post_widget.dart';
-import 'package:frontend/src/pages/create_sharing_page.dart';
+import 'package:frontend/src/pages/sharing/create_sharing_page.dart';
 import 'package:get/get.dart';
-import '../models/sharing_post.dart';
+import '../../models/sharing_post.dart';
 
 class SharingPage extends StatefulWidget {
   const SharingPage({Key? key}) : super(key: key);

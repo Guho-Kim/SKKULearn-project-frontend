@@ -16,10 +16,6 @@ class Post {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    // var commentsFromJson = json['comments'] as List? ?? [];
-    // List<Comment> commentList =
-    // commentsFromJson.map((i) => Comment.fromJson(i)).toList();
-
     return Post(
       id: json['id'],
       title: json['title'],
