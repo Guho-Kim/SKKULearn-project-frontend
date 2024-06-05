@@ -5,6 +5,7 @@ import 'pages/my_page.dart';
 import 'pages/qna_page.dart';
 import 'pages/sharing_page.dart';
 import 'pages/recruiting_page.dart';
+import 'pages/login_page.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class App extends GetView<BottomNavController> {
             index: controller.pageIndex.value,
             // children: [Home(), Recruiting(), QnA(), Sharing()],
             children: [
+              // const LoginPage(),
               const MyPage(),
               const RecruitingPage(),
               const QnAPage(),
