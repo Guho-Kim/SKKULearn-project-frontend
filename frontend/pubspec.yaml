@@ -66,10 +66,10 @@ flutter:
   assets:
     - assets/images/  
     - assets/bottom_nav/  
-    # - assets/test_img/  
-    # - assets/splash/  
-    # - assets/login_image/  
-    # - assets/test_json/
+    - assets/test_img/  
+    - assets/splash/  
+    - assets/login_image/  
+    - assets/test_json/
     # - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

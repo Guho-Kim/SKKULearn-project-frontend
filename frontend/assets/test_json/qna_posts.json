@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "title": "About Probability",
+    "content": "How do you calculate the probability of an event occurring?",
+    "point": 50,
+    "postImageUrl": "assets/images/qna_img1.png",
+    "comments": [
+      {
+        "author": "홍길동/전자전기공학부",
+        "content": "I think the answer is 6. To be honest, I'm not sure.",
+        "userImageUrl": "assets/images/default_profile.png"
+      },
+      {
+        "author": "Olivia/Mathematics",
+        "content": "I can help you with that. The answer is 1/6.",
+        "userImageUrl": "assets/images/olivia_profile.png"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Simple Math Question",
+    "content": "I don’t know how to solve..",
+    "point": 30,
+    "postImageUrl": "assets/images/qna_img2.png",
+    "comments": [
+      {
+        "author": "Tom/Electrical and Electronic Engineering",
+        "content": "It is easy! x is 12",
+        "userImageUrl": "assets/images/tom_profile.png"
+      }
+      
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Physics... Velocity...",
+    "content": "How to Calculate Velocity and Speed in this problem?",
+    "point": 20,
+    "postImageUrl": "assets/images/qna_img3.png",
+    "comments": [
+      {
+        "author": "김철수/수학과",
+        "content": "여기에 대한 수학적 접근 방법을 설명해드리겠습니다.",
+        "userImageUrl": "assets/images/default_profile.png"
+      },
+      {
+        "author": "윤지영/통계학과",
+        "content": "문제의 데이터를 다시 확인해보세요.",
+        "userImageUrl": "assets/images/default_profile.png"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Which one is Correct?",
+    "content": "It's a Korean question. Which one is right?",
+    "point": 10,
+    "postImageUrl": "assets/images/qna_img4.png",
+    "comments": [
+      {
+        "author": "최민수/전산학과",
+        "content": "여기서 사용한 알고리즘에 문제가 있을 수 있습니다.",
+        "userImageUrl": "assets/images/default_profile.png"
+      },
+      {
+        "author": "박지은/전기전자공학부",
+        "content": "코드 일부를 보여주실 수 있나요? 그럼 더 정확히 도움을 드릴 수 있을 것 같아요.",
+        "userImageUrl": "assets/images/default_profile.png"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Right grammar?",
+    "content": "I’m not sure...",
+    "point": 20,
+    "postImageUrl": "assets/images/qna_img5.png",
+    "comments": [
+      {
+        "author": "이준호/소프트웨어학과",
+        "content": "시험 준비는 이렇게 해보세요."
+        ,
+        "userImageUrl": "assets/images/default_profile.png"
+      },
+      {
+        "author": "정혜진/소프트웨어학부",
+        "content": "저는 이렇게 공부했어요."
+        ,
+        "userImageUrl": "assets/images/default_profile.png"
+      },
+      {
+        "author": "김민지/정보통신공학과",
+        "content": "기출문제를 많이 풀어보는 것이 도움이 될 거예요.",
+        "userImageUrl": "assets/images/default_profile.png"
+      }
+    ]
+  }
+]

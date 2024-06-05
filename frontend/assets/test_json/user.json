@@ -1,0 +1,10 @@
+{
+  "username": "Sophia",
+  "password": "testpassword",
+  "shares": 1,
+  "reply": 123,
+  "likes": 85,
+  "point": 1500,
+  "userImageUrl":"assets/images/sophia_profile.png",
+  "major": "Software Engineering"
+}

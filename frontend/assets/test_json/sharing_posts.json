@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "C.A. Summary Note",
+    "content": "2023년도 2학기 000교수님 필기",
+    "point": 30,
+    "imageUrl": "assets/images/sharing_img1.png",
+    "likes": 52
+  },
+  {
+    "id": 2,
+    "title": "S.E. Summary",
+    "content": "2024년도 1학기 000 교수님 정리본 및 빈칸 문제",
+    "point": 50,
+    "imageUrl": "assets/images/sharing_img2.png",
+    "likes": 19
+  },
+  {
+    "id": 3,
+    "title": "OS written note",
+    "content": "2022년도 1학기 정리본",
+    "point": 50,
+    "imageUrl": "assets/images/sharing_img3.png",
+    "likes": 0
+  },
+  {
+    "id": 4,
+    "title": "Biology Summary",
+    "content": "2021-2",
+    "point": 50,
+    "imageUrl": "assets/images/sharing_img4.png",
+    "likes": 12
+  },
+  {
+    "id": 5,
+    "title": "Calculus 2",
+    "content": "Sample Problem",
+    "point": 20,
+    "imageUrl": "assets/images/sharing_img5.png",
+    "likes": 15
+  }
+]
