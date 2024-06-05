@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/components/message_popup.dart';
+import 'package:frontend/src/pages/chatting.dart';
 import 'package:get/get.dart';
 
-enum PageName { Home, Recruiting, QnA, Sharing }
+enum PageName { Home, Recruiting, QnA, Sharing, Chatting }
 
 class BottomNavController extends GetxController {
   RxInt pageIndex = 0.obs;
@@ -11,6 +12,9 @@ class BottomNavController extends GetxController {
   void changeBottomNav(int value, {bool hasGesture = true}) {
     var page = PageName.values[value];
     switch (page) {
+      case PageName.Chatting:
+        Get.to(() => Chatting());
+        break;
       case PageName.Home:
       case PageName.Recruiting:
       case PageName.QnA:

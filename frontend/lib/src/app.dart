@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'pages/home.dart';
 import 'pages/mypage.dart';
+import 'pages/qnapage.dart';
 // import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class App extends GetView<BottomNavController> {
@@ -25,9 +26,7 @@ class App extends GetView<BottomNavController> {
               Container(
                 child: Center(child: Text('Recruiting')),
               ),
-              Container(
-                child: Center(child: Text('QnA')),
-              ),
+              const QnAPage(),
               Container(
                 child: Center(child: Text('Sharing')),
               ),
