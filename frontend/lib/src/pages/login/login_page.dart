@@ -50,13 +50,8 @@ class _LoginPageState extends State<LoginPage> {
 
     // 로그인 성공 시 메인 페이지로 이동
     if (username == _correctUsername && password == _correctPassword) {
-      userController.setUser(
-        data['username'],
-        data['shares'],
-        data['reply'],
-        data['likes'],
-        data['point'],
-      );
+      userController.setUser(data['username'], data['shares'], data['reply'],
+          data['likes'], data['point'], data['userImageUrl'], data['major']);
       Get.off(() => const App());
     } else {
       // 로그인 실패 시 에러 메시지 표시

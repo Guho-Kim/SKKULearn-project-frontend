@@ -71,7 +71,7 @@ class _RecruitingPageState extends State<RecruitingPage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 300,
+                width: 320,
                 child: TabBar(
                   labelPadding: EdgeInsets.only(right: 40),
                   controller: tabController2,

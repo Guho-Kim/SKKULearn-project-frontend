@@ -58,53 +58,59 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   }
 
   Widget _information() {
-    return Column(
-      children: [
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 50, 15, 20),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/images/profile.png'),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 50),
-                    child: Obx(() => Text(
-                          userController.username.value, // 사용자 이름 표시
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+    return Container(
+      padding: EdgeInsets.only(top: 20),
+      child: Column(
+        children: [
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 50, 15, 0),
+                child: Obx(
+                  () => CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        AssetImage(userController.userImageUrl.value),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Obx(() => _statisticsOne(
-                            'Shares', userController.shares.value)),
-                        Obx(() => _statisticsOne(
-                            'Reply', userController.reply.value)),
-                        Obx(() => _statisticsOne(
-                            'Likes', userController.likes.value)),
-                      ],
-                    ),
-                  )
-                ],
+                ),
               ),
-            )
-          ],
-        )
-      ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 50),
+                      child: Obx(() => Text(
+                            userController.username.value, // 사용자 이름 표시
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(() => _statisticsOne(
+                              'Shares', userController.shares.value)),
+                          Obx(() => _statisticsOne(
+                              'Reply', userController.reply.value)),
+                          Obx(() => _statisticsOne(
+                              'Likes', userController.likes.value)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -345,12 +351,14 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                userController.point.value.toString() + "P",
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              Obx(
+                () => Text(
+                  userController.point.value.toString() + "P",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

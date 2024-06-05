@@ -1,31 +1,31 @@
-class Post {
+class QnaPost {
   final int id;
   final String title;
   final String content;
   final int point;
-  final String imageUrl;
+  final String postImageUrl;
   final List<Comment> comments;
 
-  Post({
+  QnaPost({
     required this.id,
     required this.title,
     required this.content,
     required this.point,
-    required this.imageUrl,
+    required this.postImageUrl,
     required this.comments,
   });
 
-  factory Post.fromJson(Map<String, dynamic> json) {
+  factory QnaPost.fromJson(Map<String, dynamic> json) {
     var commentsFromJson = json['comments'] as List? ?? [];
     List<Comment> commentList =
         commentsFromJson.map((i) => Comment.fromJson(i)).toList();
 
-    return Post(
+    return QnaPost(
       id: json['id'],
       title: json['title'],
       content: json['content'],
       point: json['point'],
-      imageUrl: json['imageUrl'],
+      postImageUrl: json['postImageUrl'],
       comments: commentList,
     );
   }
@@ -34,13 +34,18 @@ class Post {
 class Comment {
   final String author;
   final String content;
+  final String userImageUrl;
 
-  Comment({required this.author, required this.content});
+  Comment(
+      {required this.author,
+      required this.content,
+      required this.userImageUrl});
 
   factory Comment.fromJson(Map<String, dynamic> json) {
     return Comment(
       author: json['author'],
       content: json['content'],
+      userImageUrl: json['userImageUrl'],
     );
   }
 }

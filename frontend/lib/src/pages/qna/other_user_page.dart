@@ -4,8 +4,9 @@ import 'package:frontend/src/controller/user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
   final String username;
+  final String userImageUrl;
 
-  OtherUserPage({required this.username});
+  OtherUserPage({required this.username, required this.userImageUrl});
 
   @override
   State<OtherUserPage> createState() => _OtherUserPageState();
@@ -54,7 +55,7 @@ class _OtherUserPageState extends State<OtherUserPage>
               padding: const EdgeInsets.fromLTRB(20, 50, 15, 20),
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/images/profile.png'),
+                backgroundImage: AssetImage(widget.userImageUrl),
               ),
             ),
             Expanded(

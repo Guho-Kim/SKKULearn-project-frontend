@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:frontend/src/controller/user_controller.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CreateSharingPage extends StatefulWidget {
   const CreateSharingPage({Key? key}) : super(key: key);
@@ -18,21 +20,170 @@ class _CreateSharingPageState extends State<CreateSharingPage> {
 
   void _createPost() {
     final newPost = {
+      "id": 6,
       'title': _titleController.text,
       'content': _contentController.text,
-      'userName': userController.username,
+      'point': 50,
+      'imageUrl': 'assets/images/document_img.png',
+      'likes': 0
     };
 
     _saveNewPost(newPost);
   }
 
   Future<void> _saveNewPost(Map<String, dynamic> newPost) async {
-    final String response =
-        await rootBundle.loadString('assets/test_json/sharing_posts.json');
-    List<dynamic> data = json.decode(response);
+    final directory = await getApplicationDocumentsDirectory();
+    final path = '${directory.path}/sharing_posts.json';
+
+    File file = File(path);
+
+    // 파일이 존재하지 않으면 새로 생성
+    if (!await file.exists()) {
+      await file.create(recursive: true);
+      await file.writeAsString(json.encode([])); // 빈 배열을 기본값으로 작성
+    }
+
+    String fileContent = await file.readAsString();
+    List<dynamic> data = json.decode(fileContent);
+
     data.add(newPost);
 
-    Get.back(result: data);
+    await file.writeAsString(json.encode(data));
+
+    Get.back(result: newPost);
+  }
+
+  void _showUploadDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: const Text('Upload Document')),
+          content: Container(
+              height: 30,
+              child: Center(
+                  child: const Text(
+                'Do you want to upload this document?',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ))),
+          actions: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: const Color(0xFF4BC27B),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _showLoadingDialog();
+                      Future.delayed(Duration(seconds: 2), () {
+                        Navigator.of(context).pop(); // Close the loading dialog
+                        // _createPost();
+                        Get.back();
+                        _showWarningDialog();
+                      });
+                    },
+                    child: const Text(
+                      'Upload',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: const Color(0xFF4BC27B),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+
+  void _showWarningDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: const Text('Warning')),
+          content: Container(
+              height: 30,
+              child: Center(
+                  child: const Text(
+                'Error Message',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ))),
+          actions: <Widget>[
+            Container(
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Return',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: const Color(0xFF4BC27B),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // _showLoadingDialog();
+                      // Future.delayed(Duration(seconds: 2), () {
+                      //   Navigator.of(context).pop(); // Close the loading dialog
+                      //   // _createPost();
+                      //   _showWarningDialog();
+                      // });
+                      Get.back();
+                      Get.back();
+                    },
+                    child: const Text(
+                      'Exit',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: const Color(0xFF4BC27B),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -146,7 +297,9 @@ class _CreateSharingPageState extends State<CreateSharingPage> {
                 child: SizedBox(
                   width: 325,
                   child: TextButton(
-                    onPressed: _createPost,
+                    onPressed: () {
+                      _showUploadDialog();
+                    },
                     child: const Text(
                       'Submit',
                       style: TextStyle(

@@ -1,4 +1,4 @@
-class Post {
+class SharingPost {
   final int id;
   final String title;
   final String content;
@@ -6,7 +6,7 @@ class Post {
   final String imageUrl;
   final int likes;
 
-  Post({
+  SharingPost({
     required this.id,
     required this.title,
     required this.content,
@@ -15,8 +15,8 @@ class Post {
     required this.likes,
   });
 
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
+  factory SharingPost.fromJson(Map<String, dynamic> json) {
+    return SharingPost(
       id: json['id'],
       title: json['title'],
       content: json['content'],

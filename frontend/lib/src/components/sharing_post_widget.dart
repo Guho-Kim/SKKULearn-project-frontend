@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/pages/sharing/SharingDetailPage.dart';
+import 'package:frontend/src/pages/sharing/sharing_detail_page.dart';
 import 'package:get/get.dart';
 import '../models/sharing_post.dart';
 
 class SharingPostWidget extends StatelessWidget {
-  final Post post;
+  final SharingPost post;
   const SharingPostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _image() {
@@ -101,15 +101,21 @@ class SharingPostWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _title(),
-                      _point(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _title(),
+                          _point(),
+                        ],
+                      ),
+                      _content(),
                     ],
                   ),
-                  _content(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

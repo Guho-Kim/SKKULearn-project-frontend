@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/controller/user_controller.dart';
 import 'package:frontend/src/models/qna_post.dart';
-import 'package:frontend/src/pages/sharing/other_user_page.dart';
+import 'package:frontend/src/pages/qna/other_user_page.dart';
 import 'package:get/get.dart';
 
 class QnADetailPage extends StatefulWidget {
-  final Post post;
+  final QnaPost post;
 
   QnADetailPage({required this.post});
 
@@ -24,9 +24,10 @@ class _QnADetailPageState extends State<QnADetailPage> {
     comments = widget.post.comments;
   }
 
-  void _addComment(String author, String content) {
+  void _addComment(String author, String content, String userImageUrl) {
     setState(() {
-      comments.add(Comment(author: author, content: content));
+      comments.add(Comment(
+          author: author, content: content, userImageUrl: userImageUrl));
     });
     userController.point.value += 5;
     _commentController.clear();
@@ -38,17 +39,47 @@ class _QnADetailPageState extends State<QnADetailPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Uploading Comments'),
-          content: Text('Got 5 Points'),
+          title: Center(child: Text('Uploading Comments')),
+          content: Container(
+            height: 30,
+            child: Center(
+              child: Text(
+                'Got 5 Points',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: const Color(0xFF4BC27B),
+                ),
+              ),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(left: 24, right: 24, bottom: 8),
+          actionsPadding: EdgeInsets.all(0),
           actions: [
-            TextButton(
-              onPressed: () {
-                _addComment(
-                    '${userController.username.value}/Software Department',
-                    _commentController.text);
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-              },
-              child: Text('Exit'),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  thickness: 1,
+                ),
+                TextButton(
+                  onPressed: () {
+                    _addComment(
+                        '${userController.username.value}/${userController.major.value}',
+                        _commentController.text,
+                        userController.userImageUrl.value);
+                    Navigator.of(context).pop(); // 다이얼로그 닫기
+                    FocusScope.of(context).unfocus();
+                  },
+                  child: Text(
+                    'Exit',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: const Color(0xFF4BC27B),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -56,11 +87,12 @@ class _QnADetailPageState extends State<QnADetailPage> {
     );
   }
 
-  void _goToOtherUserPage(String username) {
+  void _goToOtherUserPage(String username, String userImageUrl) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => OtherUserPage(username: username.split('/')[0]),
+        builder: (context) => OtherUserPage(
+            username: username.split('/')[0], userImageUrl: userImageUrl),
       ),
     );
   }
@@ -95,7 +127,7 @@ class _QnADetailPageState extends State<QnADetailPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 15.0),
                           child: Image.asset(
-                            widget.post.imageUrl,
+                            widget.post.postImageUrl,
                             width: 350,
                           ),
                         ),
@@ -113,9 +145,9 @@ class _QnADetailPageState extends State<QnADetailPage> {
                         height: 20,
                       ),
                       Text(
-                        '댓글',
+                        'Comments',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -128,15 +160,16 @@ class _QnADetailPageState extends State<QnADetailPage> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    _goToOtherUserPage(comment.author);
+                                    _goToOtherUserPage(
+                                        comment.author, comment.userImageUrl);
                                   },
                                   child: Padding(
                                     padding:
                                         const EdgeInsets.only(top: 12, left: 8),
                                     child: CircleAvatar(
                                       radius: 20,
-                                      backgroundImage: AssetImage(
-                                          'assets/images/profile.png'), // 이미지 경로를 설정하세요
+                                      backgroundImage: AssetImage(comment
+                                          .userImageUrl), // 이미지 경로를 설정하세요
                                     ),
                                   ),
                                 ),
@@ -160,7 +193,7 @@ class _QnADetailPageState extends State<QnADetailPage> {
                                             ),
                                           ),
                                           IconButton(
-                                            icon: Icon(Icons.thumb_up),
+                                            icon: Icon(Icons.more_horiz),
                                             onPressed: () {
                                               // 좋아요 기능을 구현하세요
                                             },

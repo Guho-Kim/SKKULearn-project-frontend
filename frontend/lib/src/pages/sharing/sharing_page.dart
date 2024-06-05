@@ -14,7 +14,7 @@ class SharingPage extends StatefulWidget {
 }
 
 class _SharingPageState extends State<SharingPage> {
-  List<Post> posts = [];
+  List<SharingPost> posts = [];
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SharingPageState extends State<SharingPage> {
         await rootBundle.loadString('assets/test_json/sharing_posts.json');
     final List<dynamic> data = json.decode(response);
     setState(() {
-      posts = data.map((post) => Post.fromJson(post)).toList();
+      posts = data.map((post) => SharingPost.fromJson(post)).toList();
     });
   }
 
@@ -97,13 +97,16 @@ class _SharingPageState extends State<SharingPage> {
                             onTap: () {
                               Navigator.pop(context);
                               Get.to(() => CreateSharingPage())!
-                                  .then((newPosts) {
-                                if (newPosts != null) {
+                                  .then((newPost) {
+                                if (newPost != null) {
                                   setState(() {
-                                    posts = newPosts
-                                        .map<Post>(
-                                            (post) => Post.fromJson(post))
-                                        .toList();
+                                    posts.add(SharingPost(
+                                        id: newPost['id'],
+                                        title: newPost['title'],
+                                        content: newPost['content'],
+                                        point: newPost['point'],
+                                        likes: newPost['likes'],
+                                        imageUrl: newPost['imageUrl']));
                                   });
                                 }
                               });

@@ -14,7 +14,7 @@ class QnAPage extends StatefulWidget {
 }
 
 class _QnAPageState extends State<QnAPage> {
-  List<Post> posts = [];
+  List<QnaPost> posts = [];
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _QnAPageState extends State<QnAPage> {
         await rootBundle.loadString('assets/test_json/qna_posts.json');
     final List<dynamic> data = json.decode(response);
     setState(() {
-      posts = data.map((post) => Post.fromJson(post)).toList();
+      posts = data.map((post) => QnaPost.fromJson(post)).toList();
     });
   }
 
@@ -99,8 +99,8 @@ class _QnAPageState extends State<QnAPage> {
                                 if (newPosts != null) {
                                   setState(() {
                                     posts = newPosts
-                                        .map<Post>(
-                                            (post) => Post.fromJson(post))
+                                        .map<QnaPost>(
+                                            (post) => QnaPost.fromJson(post))
                                         .toList();
                                   });
                                 }

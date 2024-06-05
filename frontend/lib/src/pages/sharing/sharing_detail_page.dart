@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/controller/user_controller.dart';
+import 'package:frontend/src/models/sharing_post.dart';
 import 'package:get/get.dart';
-import '../../models/sharing_post.dart';
 
 class SharingDetailPage extends StatefulWidget {
-  final Post post;
+  final SharingPost post;
 
   SharingDetailPage({required this.post});
 
@@ -22,10 +22,58 @@ class _SharingDetailPageState extends State<SharingDetailPage> {
     likes = widget.post.likes; // 초기 좋아요 수 설정
   }
 
-  void _incrementLikes() {
-    setState(() {
-      likes++;
-    });
+  void _downloadPost(int point) {
+    userController.point.value -= point;
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(child: Text('Download')),
+          content: Container(
+            height: 30,
+            child: Center(
+              child: Text(
+                'Successfully Downloaded!',
+                style: TextStyle(
+                  fontSize: 16,
+                  // color: const Color(0xFF4BC27B),
+                ),
+              ),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(left: 24, right: 24, bottom: 8),
+          actionsPadding: EdgeInsets.all(0),
+          actions: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  thickness: 1,
+                ),
+                TextButton(
+                  onPressed: () {
+                    _downloadPost(widget.post.point);
+                    Navigator.of(context).pop(); // 다이얼로그 닫기
+                    Get.back(); // 페이지 닫기
+                  },
+                  child: Text(
+                    'Exit',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: const Color(0xFF4BC27B),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -73,7 +121,7 @@ class _SharingDetailPageState extends State<SharingDetailPage> {
                             children: [
                               IconButton(
                                 icon: Icon(Icons.thumb_up),
-                                onPressed: _incrementLikes,
+                                onPressed: () {},
                               ),
                               Text(
                                 '$likes ',
@@ -116,7 +164,7 @@ class _SharingDetailPageState extends State<SharingDetailPage> {
             ),
             TextButton(
               onPressed: () {
-                // 다운로드 기능을 구현하세요
+                _showConfirmationDialog();
               },
               child: Text(
                 'Download: ${widget.post.point.toString()}P',

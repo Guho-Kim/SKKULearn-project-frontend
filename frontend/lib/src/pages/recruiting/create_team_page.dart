@@ -26,6 +26,7 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
       'available': 5,
       'type': _type ?? 'Tutoring',
       'userName': userController.username.value, // RxString을 일반 문자열로 변환
+      'imageUrl': userController.userImageUrl.value,
     };
 
     _saveNewPost(newPost);
@@ -38,10 +39,10 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
     File file = File(path);
 
     // 파일이 존재하지 않으면 새로 생성
-    // if (!await file.exists()) {
-    //   await file.create(recursive: true);
-    //   await file.writeAsString(json.encode([])); // 빈 배열을 기본값으로 작성
-    // }
+    if (!await file.exists()) {
+      await file.create(recursive: true);
+      await file.writeAsString(json.encode([])); // 빈 배열을 기본값으로 작성
+    }
 
     String fileContent = await file.readAsString();
     List<dynamic> data = json.decode(fileContent);

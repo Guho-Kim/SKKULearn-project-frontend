@@ -4,14 +4,14 @@ import '../models/qna_post.dart';
 import '../pages/qna/qna_detail_page.dart';
 
 class QnAPostWidget extends StatelessWidget {
-  final Post post;
+  final QnaPost post;
   const QnAPostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _image() {
     return Container(
       padding: const EdgeInsets.only(left: 10),
       child: Image.asset(
-        post.imageUrl,
+        post.postImageUrl,
         width: 100,
       ),
     );
