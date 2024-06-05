@@ -233,4 +233,12 @@ flutter run -d edge
 ```
 
 ## 실행 예시
+### Demo1(Login, My page, Recruiting page)
 ![demo1](https://github.com/Guho-Kim/2024_OSS_Project/assets/64512313/46773d43-6800-4489-b717-451a9e360c51)
+
+ 
+#
+
+### Demo2(QnA page, Sharing page)
+
+![demo2](https://github.com/Guho-Kim/2024_OSS_Project/assets/64512313/5e91bd31-9600-4e7e-832b-2710bb27ab54)
