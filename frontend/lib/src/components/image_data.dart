@@ -32,4 +32,5 @@ class IconsPath {
   static String get activeOff => 'assets/images/bottom_nav_active_off_icon.jpg';
   static String get activeOn => 'assets/images/bottom_nav_active_on_icon.jpg';
   static String get qnaImg => 'assets/test_img/qna_test_img.jpg';
+  static String get userPhoto => 'assets/images/profile.png';
 }

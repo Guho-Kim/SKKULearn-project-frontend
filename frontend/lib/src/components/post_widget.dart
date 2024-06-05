@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:frontend/src/components/image_data.dart';
+class Post {
+  final String title;
+  final String content;
+  final int point;
+
+  Post({
+    required this.title,
+    required this.content,
+    required this.point,
+  });
+}
+
+
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({Key? key}) : super(key: key);
+  final Post post;
+  const PostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _image() {
     return Container(
@@ -15,7 +29,7 @@ class PostWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, top: 10),
       child: Text(
-        '도저히 모르겠어요ㅠㅠ',
+        '${post.title}',
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -28,7 +42,7 @@ class PostWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
       child: Text(
-        '50P',
+        '${post.point}P',
         style: const TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.bold,
@@ -41,7 +55,7 @@ class PostWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
       child: Text(
-        '어떻게 해야하나요 이거??',
+        '${post.content}',
         style: const TextStyle(
           fontSize: 18,
           color: Colors.black,

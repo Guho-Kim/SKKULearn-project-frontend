@@ -10,6 +10,8 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   late TabController tabController;
+  int selectedTabIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -93,6 +95,11 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
           borderSide: BorderSide(width: 7.0, color: Colors.white),
           insets: EdgeInsets.symmetric(horizontal: -20.0),
         ),
+        onTap: (index) {
+          setState(() {
+            selectedTabIndex = index;
+          });
+        },
         tabs: [
           Container(
             // color: Colors.red,
@@ -118,40 +125,57 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
         ]);
   }
 
+Widget _myTeamsContent() {
+    return Center(
+        child: Text(
+          "My Teams Content",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+    );
+  }
+
+  Widget _pointShopContent() {
+    return Center(
+        child: Text(
+          "Point Shop Content",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Color(0xFF4BC27B),
-        //   // toolbarHeight: 140,
-        //   // elevation: 0,
-        //   title: const Text(
-        //     '김성균',
-        //     style: TextStyle(
-        //         fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
-        //   ),
-        // actions: [
-        //   GestureDetector(
-        //       onTap: () {
-        //         // print('chatting');
-        //         // Get.toNamed('/chatting');
-        //       },
-        //       child: ImageData(
-        //         IconsPath.uploadIcon,
-        //         width: 50,
-        //       )),
-        // ]
-        // ),
-        body: Container(
+      body: Container(
       color: Color(0xFF4BC27B),
-      child: SingleChildScrollView(
+      // child: SingleChildScrollView(
         child: Column(
           children: [
             _information(),
             _tabMenu(),
+              Expanded(
+                child: Container(
+                  color:Colors.white,
+                  child: TabBarView(
+                    controller: tabController,
+                    children: [
+                      _myTeamsContent(),
+                      _pointShopContent(),
+                    ],
+                  ),
+                ),
+              ),
           ],
         ),
-      ),
+      // ),
     ));
   }
 }

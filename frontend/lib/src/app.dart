@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/components/image_data.dart';
 import 'package:frontend/src/controller/bottom_nav_controller.dart';
 import 'package:get/get.dart';
-
-import 'pages/home.dart';
-import 'pages/mypage.dart';
-import 'pages/qnapage.dart';
-// import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'pages/my_page.dart';
+import 'pages/qna_page.dart';
+import 'pages/sharing_page.dart';
+import 'pages/recruiting_page.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);
@@ -23,13 +21,9 @@ class App extends GetView<BottomNavController> {
             // children: [Home(), Recruiting(), QnA(), Sharing()],
             children: [
               const MyPage(),
-              Container(
-                child: Center(child: Text('Recruiting')),
-              ),
+              const RecruitingPage(),
               const QnAPage(),
-              Container(
-                child: Center(child: Text('Sharing')),
-              ),
+              const SharingPage(),
             ],
           ),
 

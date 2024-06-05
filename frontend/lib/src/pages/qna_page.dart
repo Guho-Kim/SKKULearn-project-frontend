@@ -1,10 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-
 import '../components/post_widget.dart';
-// import 'package:frontend/src/components/image_data.dart';
 
 class QnAPage extends StatefulWidget {
   const QnAPage({Key? key}) : super(key: key);
@@ -14,13 +9,20 @@ class QnAPage extends StatefulWidget {
 }
 
 class _QnAPageState extends State<QnAPage> {
-  
+  List<Post> posts = [
+    Post(title: '도저히 모르겠어요1 ㅠㅠ', content: '어떻게 해야하나요 이거??', point: 50),
+    Post(title: '도저히 모르겠어요2 ㅠㅠ', content: '어떻게 해야하나요 이거??!!!', point: 10),
+    Post(title: '도저히 모르겠어요3 ㅠㅠ', content: '어떻게 해야하나요 이거??!!!!', point: 3),
+    Post(title: 'ㅠㅠㅠㅠㅠㅠㅠ', content: '어떻게 해야하나요 이거??!', point: 30),
+    Post(title: '소공개 화이팅ㅠ', content: '어떻게 해야하나요 이거??!!', point: 20),
+  ];
+
+
+
   Widget _appbar() {
     return Container(
-      // height: 130,
       padding: const EdgeInsets.only(left: 20, right: 10, top: 60, bottom: 8),
       color: const Color(0xFF4BC27B),
-      child: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -55,49 +57,10 @@ class _QnAPageState extends State<QnAPage> {
                     showModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
-                      // shape: const RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.only(
-                      //   topLeft: Radius.circular(20),
-                      //   topRight: Radius.circular(20),
-                      // )),
                       builder: (_) => Container(
                         height: 250,
                         child: Column(
                           children: [
-                          //   // shape: RoundedRectangleBorder(
-                          //   //   borderRadius: BorderRadius.only(
-                          //   //     topLeft: Radius.circular(20),
-                          //   //     topRight: Radius.circular(20),
-                          //   //   ),
-                          //   // ),
-                          //   Container(
-                          //     width: 350,
-                          //     padding: const EdgeInsets.symmetric(vertical: 10),
-                          //     margin: EdgeInsets.only(bottom: 10),
-                          //     decoration: BoxDecoration(
-                          //       color: Color(0xFF615D5D),
-                          //       borderRadius: BorderRadius.circular(20),
-                          //     ),
-                          //     child: Column(
-                          //       children: [
-                          //         Text('Q&A Configuration',
-                          //             style: TextStyle(
-                          //                 fontSize: 20,
-                          //                 color: Colors.white,
-                          //                 fontWeight: FontWeight.bold)),
-                          //         Text('Create New Question',
-                          //             style: TextStyle(
-                          //                 fontSize: 20,
-                          //                 color: Colors.white,
-                          //                 fontWeight: FontWeight.bold)),
-                          //         Text('My Q&A',
-                          //             style: TextStyle(
-                          //                 fontSize: 20,
-                          //                 color: Colors.white,
-                          //                 fontWeight: FontWeight.bold)),
-                          //       ],
-                          //     ),
-                          //   ),
                             Container(
                               width: 350,
                               padding: const EdgeInsets.all(10),
@@ -153,19 +116,24 @@ class _QnAPageState extends State<QnAPage> {
                               ),
                             ),
                             SizedBox(height: 15,),
-                            Container(
-                              width: 350,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF615D5D),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text('Cancel',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)),
+                            GestureDetector(
+                              onTap:(){
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                width: 350,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF615D5D),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text('Cancel',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                ),
                               ),
                             ),
                           ],
@@ -214,24 +182,15 @@ class _QnAPageState extends State<QnAPage> {
                 ],
               ),
             ),
-
-            // icon: Icon(Icons.filter_alt),
-            // color: Colors.black,
-            // iconSize: 40,
-            // Add filter 버튼을 눌렀을 때 동작
-            // Navigator.push(
-            // context,
-            // MaterialPageRoute(builder: (context) => FilterPage()), // FilterPage로 이동
-            // );
           ],
         ),
-      ),
     );
   }
 
   Widget _postList() {
     return Column(
-      children: List.generate(50, (index) => PostWidget()).toList(),
+      // children: List.generate(50, (index) => PostWidget()).toList(),
+      children: posts.map((post) => PostWidget(post: post)).toList(),
     );
   }
 
