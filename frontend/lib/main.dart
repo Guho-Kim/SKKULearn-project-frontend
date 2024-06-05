@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/app.dart';
 import 'package:frontend/src/binding/init_bindings.dart';
 import 'package:frontend/src/pages/login_page.dart';
 import 'package:get/get.dart';
+import 'package:frontend/src/controller/user_controller.dart';
 
 void main() {
+  Get.put(UserController());
   runApp(const MyApp());
 }
 

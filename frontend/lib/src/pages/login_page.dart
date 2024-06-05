@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/controller/user_controller.dart';
 import 'package:get/get.dart';
 import 'package:frontend/src/app.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -16,6 +17,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  //user controller
+  final UserController userController = Get.put(UserController());
+
   late String _correctUsername;
   late String _correctPassword;
 
@@ -27,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _loadLoginData() async {
     final String response =
-        await rootBundle.loadString('assets/test_json/test.json');
+        await rootBundle.loadString('assets/test_json/user.json');
     final data = await json.decode(response);
     setState(() {
       _correctUsername = data['username'];
@@ -35,13 +39,24 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void _login() {
-    // 로그인 로직을 구현합니다.
+  Future<void> _login() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
+    // 로컬의 test.json 파일을 로드
+    final String response =
+        await rootBundle.loadString('assets/test_json/user.json');
+    final data = json.decode(response);
+
     // 로그인 성공 시 메인 페이지로 이동
     if (username == _correctUsername && password == _correctPassword) {
+      userController.setUser(
+        data['username'],
+        data['shares'],
+        data['reply'],
+        data['likes'],
+        data['point'],
+      );
       Get.off(() => const App());
     } else {
       // 로그인 실패 시 에러 메시지 표시
@@ -49,6 +64,38 @@ class _LoginPageState extends State<LoginPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+// Future<void> _login() async {
+//     // 로그인 로직을 구현합니다.
+//     String username = _usernameController.text;
+//     String password = _passwordController.text;
+
+//     // FastAPI 백엔드로 데이터 전송
+//     var url = Uri.parse('https://yourapi.com/login'); // 여기에 API 엔드포인트 URL 입력
+//     var response = await http.post(
+//       url,
+//       headers: {'Content-Type': 'application/json'},
+//       body: json.encode({
+//         'username': username,
+//         'password': password,
+//       }),
+//     );
+
+//     if (response.statusCode == 200) {
+//       var data = json.decode(response.body);
+//       userController.setUser(
+//         data['username'],
+//         data['shares'],
+//         data['reply'],
+//         data['likes'],
+//       );
+//       // 로그인 성공 시 메인 페이지로 이동
+//       Get.off(() => const App());
+//     } else {
+//       // 로그인 실패 시 에러 메시지 표시
+//       Get.snackbar('Error', 'Invalid username or password',
+//           snackPosition: SnackPosition.BOTTOM);
+//     }
+//   }
 
   void _register() {
     // 회원가입 페이지로 이동

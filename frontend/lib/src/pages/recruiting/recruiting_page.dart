@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:frontend/src/components/recruiting_post_widget.dart';
 import 'package:frontend/src/models/recruiting_post.dart';
 import 'package:get/get.dart';
+import 'package:frontend/src/components/recruiting_post_widget.dart';
 import 'create_team_page.dart';
 
 class RecruitingPage extends StatefulWidget {

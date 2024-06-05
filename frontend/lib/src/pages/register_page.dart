@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // GetX 사용을 위한 import
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   bool _termsAccepted = false;
 
-  void _register() {
+  Future<void> _register() async {
     // 회원가입 로직을 구현합니다.
     String email = _emailController.text;
     String username = _usernameController.text;
@@ -24,9 +26,26 @@ class _RegisterPageState extends State<RegisterPage> {
     String confirmPassword = _confirmPasswordController.text;
 
     if (password == confirmPassword && _termsAccepted) {
-      // 회원가입 성공 로직 추가
-      print('Register success');
-      // 예시: JSON 파일에 사용자 정보 추가
+      // FastAPI 백엔드로 데이터 전송
+      var url =
+          Uri.parse('https://yourapi.com/register'); // 여기에 API 엔드포인트 URL 입력
+      var response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'username': username,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // 회원가입 성공 로직 추가
+        Get.snackbar('Success', 'Register success');
+      } else {
+        // 회원가입 실패 시 에러 메시지 표시
+        Get.snackbar('Error', 'Register failed: ${response.body}');
+      }
     } else if (!_termsAccepted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -52,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF4BC27B),
+                color: Color(0xFF4BC27B),
               ),
             ),
           ),
@@ -116,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF4BC27B),
+                color: Color(0xFF4BC27B),
               ),
             ),
           ),
@@ -180,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF4BC27B),
+                color: Color(0xFF4BC27B),
               ),
             ),
           ),
@@ -219,6 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
+                  obscureText: true,
                 ),
               ),
               Padding(
@@ -244,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF4BC27B),
+                color: Color(0xFF4BC27B),
               ),
             ),
           ),
@@ -283,6 +303,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
+                  obscureText: true,
                 ),
               ),
               Padding(

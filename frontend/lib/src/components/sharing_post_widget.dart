@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
-import 'package:frontend/src/components/image_data.dart';
-class Post {
-  final String title;
-  final String content;
-  final int point;
+import 'package:frontend/src/pages/SharingDetailPage.dart';
+import 'package:get/get.dart';
+import '../models/sharing_post.dart';
 
-  Post({
-    required this.title,
-    required this.content,
-    required this.point,
-  });
-}
-
-
-
-class PostWidget extends StatelessWidget {
+class SharingPostWidget extends StatelessWidget {
   final Post post;
-  const PostWidget({Key? key, required this.post}) : super(key: key);
+  const SharingPostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _image() {
     return Container(
-        padding: const EdgeInsets.only(left: 10),
-        child: ImageData(IconsPath.qnaImg, width: 300));
+      padding: const EdgeInsets.only(left: 10),
+      child: Image.asset(
+        post.imageUrl,
+        width: 100,
+      ),
+    );
   }
 
   Widget _title() {
@@ -38,6 +30,7 @@ class PostWidget extends StatelessWidget {
       ),
     );
   }
+
   Widget _point() {
     return Container(
       padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
@@ -51,29 +44,55 @@ class PostWidget extends StatelessWidget {
       ),
     );
   }
+
+  Widget _like() {
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Row(
+        children: [
+          Text(
+            '${post.likes} ',
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF4BC27B),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/green_thumb.png'),
+            width: 30,
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _content() {
     return Container(
-      padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Text(
         '${post.content}',
         style: const TextStyle(
           fontSize: 18,
           color: Colors.black,
         ),
+        maxLines: 2,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.only(top: 10),
-        // color: Colors.red,
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => SharingDetailPage(post: post));
+      },
+      child: Container(
+        // margin: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(width: 1, color: Colors.black),
-          )
-
+          ),
         ),
         height: 150,
         child: Row(
@@ -91,10 +110,18 @@ class PostWidget extends StatelessWidget {
                     ],
                   ),
                   _content(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _like(),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

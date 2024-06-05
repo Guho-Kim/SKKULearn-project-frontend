@@ -28,10 +28,11 @@ class BottomNavController extends GetxController {
   void _changePage(int value, {bool hasGesture = true}) {
     pageIndex(value);
     if (!hasGesture) return;
-    if (bottomHistory.last != value) {
-      bottomHistory.add(value);
-      print(bottomHistory);
+    if (bottomHistory.contains(value)) {
+      bottomHistory.remove(value); // 이미 존재하는 경우 제거
     }
+    bottomHistory.add(value); // 방금 선택한 페이지를 제일 뒤로 추가
+    print(bottomHistory);
   }
 
   Future<bool> onBackPressed() async {

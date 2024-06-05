@@ -1,62 +1,46 @@
 import 'package:flutter/material.dart';
-
-class RecruitingPost {
-  final String title;
-  final String content;
-  final int available;
-  final String type; // 'Tutoring' 또는 'Mentoring'
-  final String userName;
-
-  RecruitingPost({
-    required this.title,
-    required this.content,
-    required this.available,
-    required this.type,
-    required this.userName,
-  });
-}
+import 'package:frontend/src/models/recruiting_post.dart';
 
 class RecruitingPostWidget extends StatelessWidget {
   final RecruitingPost post;
   const RecruitingPostWidget({Key? key, required this.post}) : super(key: key);
   Widget _image() {
     return Container(
-        padding: const EdgeInsets.only(left: 10, bottom: 10),
-        child: CircleAvatar(
-                radius: 36,
-                backgroundImage: AssetImage('assets/images/profile.png'),
-              ),);
-  }
-  Widget _userName() {
-    return Container(
-        padding: const EdgeInsets.only(left: 10),
-        child: Text(
-          '${post.userName}',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        );
+      padding: const EdgeInsets.only(left: 10, bottom: 10),
+      child: CircleAvatar(
+        radius: 36,
+        backgroundImage: AssetImage(post.imageUrl),
+      ),
+    );
   }
 
-  Widget _title() {
-    return Center(
-      // padding: const EdgeInsets.only(left: 10, top: 10),
+  Widget _userName() {
+    return Container(
+      padding: const EdgeInsets.only(left: 10),
       child: Text(
-        'Title: ${post.title}',
-        style: const TextStyle(
-          fontSize: 20,
+        '${post.userName}',
+        style: TextStyle(
+          fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
       ),
     );
   }
+
+  Widget _title() {
+    return Text(
+      post.title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+    );
+  }
+
   Widget _content() {
     return Align(
-      // padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         '${post.content}',
@@ -73,7 +57,7 @@ class RecruitingPostWidget extends StatelessWidget {
       // padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
       alignment: Alignment.centerRight,
       child: Padding(
-        padding: const EdgeInsets.only(top:10, right:10),
+        padding: const EdgeInsets.only(right: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -98,38 +82,50 @@ class RecruitingPostWidget extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 10),
         // color: Colors.red,
         decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 3, color: Color(0xFF4BC27B),),
-          )
-
+            border: Border(
+          bottom: BorderSide(
+            width: 3,
+            color: Color(0xFF4BC27B),
+          ),
+        )),
+        constraints: BoxConstraints(
+          minHeight: 160, // Set the minimum height
         ),
-        height: 160,
         child: Row(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _image(),
-                  _userName(),
-                ],
+              child: Container(
+                width: 120,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _image(),
+                    _userName(),
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(left: 20, right:50),
+                padding: const EdgeInsets.only(right: 20),
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _title(),
-                    _content(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _title(),
+                        _content(),
+                      ],
+                    ),
                     _available(),
                   ],
                 ),

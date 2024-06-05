@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:frontend/src/components/image_data.dart';
+import 'package:frontend/src/controller/user_controller.dart';
+import 'package:get/get.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   late TabController tabController;
   int selectedTabIndex = 0;
+
+  final UserController userController = Get.find<UserController>();
 
   @override
   void initState() {
@@ -57,23 +60,26 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15, top: 50),
-                    child: Text(
-                      'UserName',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Obx(() => Text(
+                          userController.username.value, // 사용자 이름 표시
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _statisticsOne('Shares', 1),
-                        _statisticsOne('Reply', 123),
-                        _statisticsOne('Likes', 12000),
+                        Obx(() => _statisticsOne(
+                            'Shares', userController.shares.value)),
+                        Obx(() => _statisticsOne(
+                            'Reply', userController.reply.value)),
+                        Obx(() => _statisticsOne(
+                            'Likes', userController.likes.value)),
                       ],
                     ),
                   )
@@ -125,56 +131,56 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
         ]);
   }
 
-Widget _myTeamsContent() {
+  Widget _myTeamsContent() {
     return Center(
-        child: Text(
-          "My Teams Content",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+      child: Text(
+        "My Teams Content",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
+      ),
     );
   }
 
   Widget _pointShopContent() {
     return Center(
-        child: Text(
-          "Point Shop Content",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+      child: Text(
+        "Point Shop Content",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Container(
       color: Color(0xFF4BC27B),
       // child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _information(),
-            _tabMenu(),
-              Expanded(
-                child: Container(
-                  color:Colors.white,
-                  child: TabBarView(
-                    controller: tabController,
-                    children: [
-                      _myTeamsContent(),
-                      _pointShopContent(),
-                    ],
-                  ),
-                ),
+      child: Column(
+        children: [
+          _information(),
+          _tabMenu(),
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  _myTeamsContent(),
+                  _pointShopContent(),
+                ],
               ),
-          ],
-        ),
+            ),
+          ),
+        ],
+      ),
       // ),
     ));
   }
