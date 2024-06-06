@@ -60,8 +60,7 @@
 #### 1. Install the Flutter SDK for Windows
 플러터 설치 방법이 까다로울 수 있습니다. 아래 지침을 잘 따라가 주세요.
 
-(Linux 또는 MacOS의 경우 아래 사이트의 지침을 따라주세요.)
-https://docs.flutter.dev/get-started/install
+(Linux 또는 MacOS의 경우 다음 사이트의 지침을 따라주세요 https://docs.flutter.dev/get-started/install)
 
 1. VS Code를 사용하여 Flutter를 설치합니다.
     - Visual Studio Code 1.77 이상 버전과 VS Code용 Flutter 확장이 설치되어 있는지 확인하십시오.
